@@ -1,8 +1,5 @@
 package com.smoothstack.utopiaspring.service;
 
-
-
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.smoothstack.utopiaspring.model.Airplane;
 
 import com.smoothstack.utopiaspring.repository.AirplaneRepository;
-
 
 @Service
 public class AirplaneService {
@@ -26,7 +22,10 @@ public class AirplaneService {
 	public List<Airplane> getAirplanes() {
 		return airplaneRepo.findAll();
 	}
-	
-	
+
+	public void save(Airplane airplane) {
+		airplaneRepo.save(airplane);
+		
+	}
 
 }

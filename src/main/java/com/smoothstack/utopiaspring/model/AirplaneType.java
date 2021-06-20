@@ -1,23 +1,21 @@
 package com.smoothstack.utopiaspring.model;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+
 import javax.persistence.Id;
 import javax.persistence.Table;
-
 
 @Entity
 @Table(name = "airplane_type")
 public class AirplaneType {
 
-    @Id
-    // why is this auto increment in the schema ? @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	// why is this auto increment in the schema ? @GeneratedValue(strategy =
+	// GenerationType.IDENTITY)
 	private Integer id;
-    
-    @Column(name = "max_capacity")
+
+	@Column(name = "max_capacity")
 	private Integer maxCap;
 
 	/**
@@ -47,7 +45,5 @@ public class AirplaneType {
 	public void setMaxCap(Integer maxCap) {
 		this.maxCap = maxCap;
 	}
-    
-    
-    
+
 }

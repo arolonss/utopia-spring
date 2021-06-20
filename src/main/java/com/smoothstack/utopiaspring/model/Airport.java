@@ -1,14 +1,9 @@
 package com.smoothstack.utopiaspring.model;
 
-import java.util.List;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
-import org.hibernate.annotations.CascadeType;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "airport")
@@ -16,9 +11,9 @@ public class Airport {
 
 	@Id
 	private String iataId;
-	
+
 	private String city;
-   
+
 	public Airport() {
 
 	}
