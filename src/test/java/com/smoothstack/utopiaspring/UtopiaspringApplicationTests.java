@@ -1,13 +1,13 @@
-//package com.smoothstack.utopiaspring;
-//
-//import org.junit.jupiter.api.Test;
-//import org.springframework.boot.test.context.SpringBootTest;
+package com.smoothstack.utopiaspring;
 
-//@SpringBootTest
-//class UtopiaspringApplicationTests {
-//
-//	@Test
-//	void contextLoads() {
-//	}
-//
-//}
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class UtopiaspringApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}

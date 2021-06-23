@@ -3,23 +3,26 @@ package com.smoothstack.utopiaspring.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import org.springframework.web.bind.annotation.RestController;
 
 import com.smoothstack.utopiaspring.model.Airplane;
 
-
 import com.smoothstack.utopiaspring.service.AirplaneService;
+
+
 
 
 @RestController
 @RequestMapping(value = "/utopia")
 public class AirplaneController {
-
-
 
 	@Autowired
 	private final AirplaneService airplaneService;
@@ -38,4 +41,27 @@ public class AirplaneController {
 		airplaneService.save(airplane);
 		return airplaneService.getAirplanes();
 	}
+	
+	@GetMapping(value = "/airplanes/{id}")
+	public Airplane getAirplaneById(@PathVariable("id") Integer id) {
+		return airplaneService.getAirplaneById(id);
+	}
+	
+//	@PutMapping(path = "/airplanes/{id}")
+//	public Airplane updateAirplane(@PathVariable("id") Integer id, @R) {
+//		airplaneService.updateAirplane(id);
+//	}
+	
+//	@PutMapping(path = "/airplanes/{id}/edit")
+//	public Airplane updateAirplane(@RequestBody Airplane airplane, @PathVariable("id") Integer id) {
+//		airplaneService.save(airplane);
+//		return airplaneService.getAirplaneById(id);
+//	}
+//	
+	@DeleteMapping(path = "/airplanes/{id}")
+	public void deleteAirplane(@PathVariable("id") Integer id) {
+		airplaneService.deleteAirplane(id);
+	}
+	
+	
 }

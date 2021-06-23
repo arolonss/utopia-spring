@@ -11,9 +11,10 @@ import com.smoothstack.utopiaspring.repository.FlightRepository;
 @Service
 public class FlightService {
 
+	@Autowired
 	private final FlightRepository flightRepo;
 
-	@Autowired
+	
 	public FlightService(FlightRepository flightRepo) {
 		this.flightRepo = flightRepo;
 	}
@@ -25,6 +26,19 @@ public class FlightService {
 	public void save(Flight flight) {
 		flightRepo.save(flight);
 
+	}
+	
+	public Flight getFlightById(Integer id) {
+		return flightRepo.findById(id).get();
+	}
+
+	public void deleteFlight(Integer id) {
+		boolean exists = flightRepo.existsById(id);
+		if (!exists) {
+			throw new IllegalStateException("Flight " + id + " does not exist!");
+		}
+		flightRepo.deleteById(id);
+		
 	}
 
 }

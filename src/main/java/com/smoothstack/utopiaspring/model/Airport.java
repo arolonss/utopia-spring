@@ -13,6 +13,8 @@ public class Airport {
 	private String iataId;
 
 	private String city;
+	
+	
 
 	public Airport() {
 
@@ -26,6 +28,8 @@ public class Airport {
 		this.iataId = iataId;
 		this.city = city;
 	}
+
+	
 
 	@Override
 	public String toString() {
@@ -59,5 +63,7 @@ public class Airport {
 	public void setCity(String city) {
 		this.city = city;
 	}
+
+	
 
 }

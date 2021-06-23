@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import com.smoothstack.utopiaspring.model.Booking;
 import com.smoothstack.utopiaspring.repository.BookingRepository;
 
@@ -24,6 +25,19 @@ public class BookingService {
 
 	public Booking save(Booking booking) {
 		return bookingRepo.save(booking);
+	}
+	
+	public Booking getBookingById(Integer id) {
+		return bookingRepo.findById(id).get();
+	}
+	
+	public void deleteBooking(Integer id) {
+		boolean exists = bookingRepo.existsById(id);
+		if (!exists) {
+			throw new IllegalStateException("Booking number " + id + " does not exist!");
+		}
+		bookingRepo.deleteById(id);
+		
 	}
 
 }

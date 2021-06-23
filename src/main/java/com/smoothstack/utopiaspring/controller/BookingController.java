@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +35,11 @@ public class BookingController {
 	public List<Booking> createBooking(@RequestBody Booking booking) {
 		bookingService.save(booking);
 		return bookingService.getBookings();
+	}
+	
+	@GetMapping(value = "/bookings/{id}")
+	public Booking getBookingById(@PathVariable("id") Integer id) {
+		return bookingService.getBookingById(id);
 	}
 
 }
