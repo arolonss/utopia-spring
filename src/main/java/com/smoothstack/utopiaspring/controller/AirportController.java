@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -41,5 +42,17 @@ public class AirportController {
 	public Airport getAirportById(@PathVariable("id") String id) {
 		return airportService.getAirportById(id);
 	}
+	
+	@PutMapping(value = "/airports/{id}")
+	public Airport updateAirport(@RequestBody Airport airport) {
+
+		System.out.println(airport + "from AirportController");
+
+		airportService.updateAirport(airport);
+		return airportService.getAirportById(airport.getIataId());
+	}
+	
+	
+
 
 }

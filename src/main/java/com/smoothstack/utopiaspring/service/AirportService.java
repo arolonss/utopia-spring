@@ -13,10 +13,9 @@ import com.smoothstack.utopiaspring.repository.AirportRepository;
 @Service
 public class AirportService {
 
+	@Autowired
 	private final AirportRepository airportRepo;
 	
-
-	@Autowired
 	public AirportService(AirportRepository airportRepo) {
 		this.airportRepo = airportRepo;
 	}
@@ -41,6 +40,35 @@ public class AirportService {
 	}
 	
 	
+	
+	public Airport updateAirport(Airport airport) {
+		Optional<Airport> updatedAirport = airportRepo.findById(airport.getIataId());
+		System.out.println("updated airport: " + updatedAirport);
+		System.out.println("airport: " + airport);
+		
+		String updatedIataId = airport.getIataId();
+		String updatedCity = airport.getCity();
+		
+		if (updatedAirport.isPresent()) {
+			if (updatedIataId != null && updatedIataId.length() > 0) {
+
+				updatedAirport.get().setIataId(updatedIataId); 
+			}
+
+			if (updatedCity != null && updatedCity.length() > 0 ) {
+
+				
+				updatedAirport.get().setCity(updatedCity); 
+			}
+
+			System.out.println(updatedAirport + "before saving");
+			airport = airportRepo.save(updatedAirport.get());
+		}
+        System.out.println(airport + "after saving");
+		return airport;
+
+	}
+	
 	public void deleteAirport(String id) {
 		boolean exists = airportRepo.existsById(id);
 		if (!exists) {
@@ -49,6 +77,7 @@ public class AirportService {
 		airportRepo.deleteById(id);
 		
 	}
+
     
 
 }
