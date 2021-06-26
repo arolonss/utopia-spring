@@ -7,14 +7,15 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import com.smoothstack.utopiaspring.model.Flight;
-
 import com.smoothstack.utopiaspring.service.FlightService;
+
+
 
 @RestController
 @RequestMapping(value = "/utopia")
@@ -43,9 +44,16 @@ public class FlightController {
 		return flightService.getFlightById(id);
 	}
 	
+	@PutMapping(value = "/flights/{id}")
+	public Flight updateFlight(@RequestBody Flight flight) {
+
+		System.out.println(flight + "from FlightController");
+
+		flightService.updateFlight(flight);
+		return flightService.getFlightById(flight.getId());
+	}
 	
-	
-	@DeleteMapping(path = "/flights/{id}")
+	@DeleteMapping(value = "/flights/{id}")
 	public void deleteFlight(@PathVariable("id") Integer id) {
 		flightService.deleteFlight(id);
 	}

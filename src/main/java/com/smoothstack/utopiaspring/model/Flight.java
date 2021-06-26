@@ -4,8 +4,10 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,14 +15,14 @@ import javax.persistence.Table;
 public class Flight {
 
 	@Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
     
-    @Column(name = "route_id")
-	private Integer routeId;
+	@ManyToOne
+    private Route routeId;
     
-    @Column(name = "airplane_id")
-	private String airplaneId;
+	@ManyToOne
+	private Airplane airplaneId;
     
     @Column(name = "departure_time")
 	private Timestamp depTime;
@@ -48,28 +50,28 @@ public class Flight {
 	/**
 	 * @return the routeId
 	 */
-	public Integer getRouteId() {
+	public Route getRouteId() {
 		return routeId;
 	}
 
 	/**
 	 * @param routeId the routeId to set
 	 */
-	public void setRouteId(Integer routeId) {
+	public void setRouteId(Route routeId) {
 		this.routeId = routeId;
 	}
 
 	/**
 	 * @return the airplaneId
 	 */
-	public String getAirplaneId() {
+	public Airplane getAirplaneId() {
 		return airplaneId;
 	}
 
 	/**
 	 * @param airplaneId the airplaneId to set
 	 */
-	public void setAirplaneId(String airplaneId) {
+	public void setAirplaneId(Airplane airplaneId) {
 		this.airplaneId = airplaneId;
 	}
 
@@ -114,7 +116,69 @@ public class Flight {
 	public void setSeatPrice(Float seatPrice) {
 		this.seatPrice = seatPrice;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((airplaneId == null) ? 0 : airplaneId.hashCode());
+		result = prime * result + ((depTime == null) ? 0 : depTime.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((reservedSeats == null) ? 0 : reservedSeats.hashCode());
+		result = prime * result + ((routeId == null) ? 0 : routeId.hashCode());
+		result = prime * result + ((seatPrice == null) ? 0 : seatPrice.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Flight other = (Flight) obj;
+		if (airplaneId == null) {
+			if (other.airplaneId != null)
+				return false;
+		} else if (!airplaneId.equals(other.airplaneId))
+			return false;
+		if (depTime == null) {
+			if (other.depTime != null)
+				return false;
+		} else if (!depTime.equals(other.depTime))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (reservedSeats == null) {
+			if (other.reservedSeats != null)
+				return false;
+		} else if (!reservedSeats.equals(other.reservedSeats))
+			return false;
+		if (routeId == null) {
+			if (other.routeId != null)
+				return false;
+		} else if (!routeId.equals(other.routeId))
+			return false;
+		if (seatPrice == null) {
+			if (other.seatPrice != null)
+				return false;
+		} else if (!seatPrice.equals(other.seatPrice))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Flight [id=" + id + ", routeId=" + routeId + ", airplaneId=" + airplaneId + ", depTime=" + depTime
+				+ ", reservedSeats=" + reservedSeats + ", seatPrice=" + seatPrice + "]";
+	}
     
+	
  
 
 }

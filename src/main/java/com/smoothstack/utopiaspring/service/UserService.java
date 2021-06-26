@@ -26,8 +26,8 @@ public class UserService {
 		return userRepo.findAll();
 	}
 
-	public void save(User user) {
-		userRepo.save(user);
+	public User save(User user) {
+		return userRepo.save(user);
 
 	}
 
@@ -35,62 +35,22 @@ public class UserService {
 		return userRepo.findById(id).get();
 	}
 
-	public void deleteUser(Integer id) {
-		boolean exists = userRepo.existsById(id);
-		if (!exists) {
-			throw new IllegalStateException("User " + id + " does not exist!");
+	@Transactional
+	public User deleteUser(Integer id) {
+		Optional<User> user = userRepo.findById(id);
+		if(user.isPresent()){
+			userRepo.deleteById(id);
 		}
-		userRepo.deleteById(id);
+		return user.orElse(null);
 	}
 
 	@Transactional
-	public User updateUser(User user, String firstName, String lastName, String username, String email, String password,
-			String phone) {
-		// User user = userService.getUserById(id);
-		// userRepo.findById(id).orElseThrow(() -> new IllegalStateException(
-//				"User " + id + " does not exist!"));
-		user.setRoleId(user.getRoleId());
-		if (firstName != null && firstName.length() > 0 && !Objects.equals(user.getFirstName(), firstName)) {
+    public User updateUser(User user) {
 
-			user.setFirstName(firstName);
-		}
-
-		if (lastName != null && lastName.length() > 0 && !Objects.equals(user.getLastName(), lastName)) {
-
-			user.setLastName(lastName);
-		}
-
-		if (username != null && username.length() > 0 && !Objects.equals(user.getUsername(), username)) {
-
-			user.setFirstName(firstName);
-		}
-
-		if (email != null && email.length() > 0 && !Objects.equals(user.getEmail(), email)) {
-
-			user.setFirstName(firstName);
-		}
-
-		if (password != null && password.length() > 0 && !Objects.equals(user.getPassword(), password)) {
-
-			user.setFirstName(firstName);
-		}
-
-		if (phone != null && phone.length() > 0 && !Objects.equals(user.getPhone(), phone)) {
-
-			user.setFirstName(firstName);
-		}
-		User updatedUser = userRepo.save(user);
-
-		return updatedUser;
-
-	}
-
-	public User updateUser(User user) {
-		//user = userRepo.findById(user.getId()).get();
 		Optional<User> updatedUser = userRepo.findById(user.getId());
 		System.out.println("updated user: " + updatedUser);
 		System.out.println("user: " + user);
-		//Integer role = user.getRoleId();
+
 		String updatedFirstName = user.getFirstName();
 		String updatedLastName = user.getLastName();
 		String updatedUsername = user.getUsername();
@@ -98,44 +58,42 @@ public class UserService {
 		String updatedPassword = user.getPassword();
 		String updatedPhone = user.getPhone();
 		updatedUser.get().setRoleId(user.getRoleId());
-		//System.out.println(role);
+
 		System.out.println(updatedUser.get().getRoleId());
 		if (updatedUser.isPresent()) {
 			if (updatedFirstName != null && updatedFirstName.length() > 0) {
 
-				updatedUser.get().setFirstName(updatedFirstName); 
+				updatedUser.get().setFirstName(updatedFirstName);
 			}
 
-			if (updatedLastName != null && updatedLastName.length() > 0 ) {
+			if (updatedLastName != null && updatedLastName.length() > 0) {
 
-				
-				updatedUser.get().setLastName(updatedLastName); //.orElseGet(() -> updatedUser.get().getLastName()));
+				updatedUser.get().setLastName(updatedLastName);
 			}
 
-			if (updatedUsername != null && updatedUsername.length() > 0 ) {
+			if (updatedUsername != null && updatedUsername.length() > 0) {
 
-				//updatedUser.setFirstName(firstName);
-				updatedUser.get().setUsername(updatedUsername); //.orElseGet(() -> updatedUser.get().getUsername()));
+				updatedUser.get().setUsername(updatedUsername);
 			}
 
-			if (updatedEmail != null && updatedEmail.length() > 0 ) {
+			if (updatedEmail != null && updatedEmail.length() > 0) {
 
 				updatedUser.get().setEmail(updatedEmail);
 			}
 
-			if (updatedPassword != null && updatedPassword.length() > 0 ) {
+			if (updatedPassword != null && updatedPassword.length() > 0) {
 
 				updatedUser.get().setPassword(updatedPassword);
 			}
 
-			if (updatedPhone != null && updatedPhone.length() > 0 ) {
+			if (updatedPhone != null && updatedPhone.length() > 0) {
 
 				updatedUser.get().setPhone(updatedPhone);
 			}
-			System.out.println(updatedUser + "before saving");
+
 			user = userRepo.save(updatedUser.get());
 		}
-        System.out.println(user + "after saving");
+
 		return user;
 
 	}

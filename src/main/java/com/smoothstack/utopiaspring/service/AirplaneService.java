@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import com.smoothstack.utopiaspring.model.Airplane;
 
 import com.smoothstack.utopiaspring.repository.AirplaneRepository;
@@ -34,17 +35,8 @@ public class AirplaneService {
 		return airplaneRepo.findById(id).get();
 	}
 
-//	@Transactional
-//	public void updateAirplane(Integer id, Integer typeId) {
-//	  	Airplane airplane = airplaneRepo.findById(id).orElseThrow(() -> new IllegalStateException("Airplane " + id + " does not exist!"));
-//	    
-//	  	if (typeId != null && !Objects.equals(airplane.getTypeId(), typeId)) {
-//	  		airplane.setTypeId(typeId);
-//	  	} else {
-//	  		throw new IllegalStateException("New value must be different than current value!");
-//	  	}
-//	  	airplaneRepo.save();
-//	}
+
+	
 	
 	public void deleteAirplane(Integer id) {
 		boolean exists = airplaneRepo.existsById(id);
@@ -54,6 +46,8 @@ public class AirplaneService {
 		airplaneRepo.deleteById(id);
 			
 	}
+
+
 
 	
 }

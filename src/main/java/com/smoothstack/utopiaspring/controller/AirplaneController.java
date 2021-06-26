@@ -47,17 +47,8 @@ public class AirplaneController {
 		return airplaneService.getAirplaneById(id);
 	}
 	
-//	@PutMapping(path = "/airplanes/{id}")
-//	public Airplane updateAirplane(@PathVariable("id") Integer id, @R) {
-//		airplaneService.updateAirplane(id);
-//	}
+
 	
-//	@PutMapping(path = "/airplanes/{id}/edit")
-//	public Airplane updateAirplane(@RequestBody Airplane airplane, @PathVariable("id") Integer id) {
-//		airplaneService.save(airplane);
-//		return airplaneService.getAirplaneById(id);
-//	}
-//	
 	@DeleteMapping(path = "/airplanes/{id}")
 	public void deleteAirplane(@PathVariable("id") Integer id) {
 		airplaneService.deleteAirplane(id);
